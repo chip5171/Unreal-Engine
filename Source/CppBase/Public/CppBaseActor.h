@@ -34,6 +34,8 @@ public:
 
 private:
 	void ShowActorInformation();
-
+	
+	UPROPERTY(VisibleAnywhere);
+	UStaticMeshComponent* Mesh;
 
 };
