@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "CppBaseActor.generated.h"
 
+
 UCLASS()
 class CPPBASE_API ACppBaseActor : public AActor
 {
@@ -19,23 +20,25 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere);
+	float Amplitude = 70.0;
+
 	UPROPERTY(VisibleAnywhere);
-	FString PlayerName = GetName();
+	float Frequency = 4.0;
 
-	UPROPERTY(EditInstanceOnly);
-	int EnemyNum = 20;
+	UPROPERTY(EditAnywhere);
+	FVector InitialLocation; //	= GetActorLocation();
 
-	UPROPERTY(EditInstanceOnly);
-	bool IsAlive = true;
+	UFUNCTION(BlueprintCallable)
+	void SinMovement();
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-private:
-	void ShowActorInformation();
-	
 	UPROPERTY(VisibleAnywhere);
 	UStaticMeshComponent* Mesh;
 
+private:
+		
 };

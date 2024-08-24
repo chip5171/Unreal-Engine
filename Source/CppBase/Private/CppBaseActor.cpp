@@ -19,7 +19,7 @@ void ACppBaseActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ShowActorInformation();
+	InitialLocation = GetActorLocation();
 	
 }
 
@@ -30,10 +30,12 @@ void ACppBaseActor::Tick(float DeltaTime)
 
 }
 
-void ACppBaseActor::ShowActorInformation()
+void ACppBaseActor::SinMovement() 
 {
-
-	UE_LOG(LogTemp, Display, TEXT("Instance name: %s"), *PlayerName);
-	UE_LOG(LogTemp, Display, TEXT("EnemyNum: %d"), EnemyNum);
-	UE_LOG(LogTemp, Display, TEXT("IsAlive: %i"), IsAlive);
+	UWorld* World = GetWorld();
+	double CurrentTime = World->GetTimeSeconds();
+	
+	InitialLocation.Z += Amplitude * FMath::Sin(Frequency * CurrentTime);
+	
+	SetActorLocation(InitialLocation);
 }
